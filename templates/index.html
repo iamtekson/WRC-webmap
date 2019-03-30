@@ -78,43 +78,10 @@ var baseLayers = {
 // L.control.layers(baseLayers).addTo(map);
 
 /* =============================================================================
-                Overlaying Information Interactively on Map
-============================================================================== */
-var coolPlaces = new L.LayerGroup();
-
-        L.marker([28.2539, 83.9764])
-        .bindPopup('Te Papa').addTo(coolPlaces),
-        L.marker([-41.29437, 174.78405])
-        .bindPopup('Embassy Theatre').addTo(coolPlaces),
-        L.marker([-41.2895, 174.77803])
-        .bindPopup('Michael Fowler Centre').addTo(coolPlaces),
-        L.marker([-41.28313, 174.77736])
-        .bindPopup('Leuven Belgin Beer Cafe').addTo(coolPlaces),
-
-        L.polyline([
-        [28.2539, 83.9764],
-        [-41.2895, 174.77803],
-        [-41.29042, 174.78219],
-        [-41.29437, 174.78405]
-        ]
-        ).addTo(coolPlaces);
-
-
-
-/* =============================================================================
                             Add Required Geojson Files
 ============================================================================== */
 /*var geojsonLayer = new L.GeoJSON.AJAX("{% url 'point_dataset' %}");       
 geojsonLayer.addTo(map);*/
-var roadNetwork = new L.LayerGroup();
-$.getJSON("{% url 'road_dataset' %}", function(data){
-  var geojson = L.geojson(data, {
-    onEachFeature: function(feature, layer) {
-      layer.bindPopup(feature.properties.road_name);
-  }
-});
-  geojson.addTo(roadNetwork);
-  });
 
  var points = new L.LayerGroup();
  $.getJSON("{% url 'point_dataset' %}", function(data) {
@@ -126,10 +93,41 @@ $.getJSON("{% url 'road_dataset' %}", function(data){
 geojson.addTo(points);
     });
 
+var roadNetwork = new L.LayerGroup();   
+$.getJSON("{% url 'road_dataset' %}", function(data){
+  var geojson = L.geoJson(data, {
+    onEachFeature: function(feature, layer) {
+      layer.bindPopup(feature.properties.road_name);
+  }
+});
+  geojson.addTo(roadNetwork);
+  });
+
+
+var wifi = new L.LayerGroup();   
+$.getJSON("{% url 'wifi_dataset' %}", function(data){
+  var geojson = L.geoJson(data, {
+    onEachFeature: function(feature, layer) {
+      layer.bindPopup(feature.properties.from_field);
+  }
+});
+  geojson.addTo(wifi);
+  });
+
+$.getJSON("{% url 'wifi_node' %}", function(data){
+  var geojson = L.geoJson(data, {
+    onEachFeature: function(feature, layer) {
+      layer.bindPopup(feature.properties.router_poi);
+  }
+});
+  geojson.addTo(wifi);
+  });
+
+
         var overlays = {
-        "Interesting places": coolPlaces,
         "Important Places": points,
-        "Road Network": roadNetwork
+        "Road Network": roadNetwork,
+        "Wifi Network": wifi
         };
 L.control.layers(baseLayers,overlays).addTo(map);
 L.control.scale().addTo(map);

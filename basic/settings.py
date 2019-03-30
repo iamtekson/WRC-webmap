@@ -146,8 +146,8 @@ STATICFILES_DIRS = [
 
 # leaflet Module
 LEAFLET_CONFIG = {
-    'DEFAULT_CENTER': (28.2380, 83.9956),
-    'DEFAULT_ZOOM': 10,
+    'DEFAULT_CENTER': (28.2539, 83.9764),
+    'DEFAULT_ZOOM': 17,
     'MIN_ZOOM': 3,
     'MAX_ZOOM': 20,
     'SCALE': 'both',
@@ -160,7 +160,7 @@ LEAFLET_CONFIG = {
         'maxZoom': 17,
         'attribution': 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
     })],
-    'OVERLAYS': [('Cadastral', 'http://server/a/{z}/{x}/{y}.png', {'attribution': '&copy; IGN'})]
+    'OVERLAYS': [('Road Network', 'roadNetwork', {'attribution': '&copy; IGN'})]
     }
 
 
