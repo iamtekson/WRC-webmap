@@ -131,7 +131,8 @@ $.getJSON("{% url 'wifi_node' %}", function(data){
         };
 L.control.layers(baseLayers,overlays).addTo(map);
 L.control.scale().addTo(map);
-
+roadNetwork.addTo(map);
+wifi.addTo(map);
 
 
 document.getElementById("submit").onclick = function(e){
