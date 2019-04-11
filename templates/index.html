@@ -93,9 +93,15 @@ geojsonLayer.addTo(map);*/
 geojson.addTo(points);
     });
 
-var roadNetwork = new L.LayerGroup();   
+var roadNetwork = new L.LayerGroup(); 
+var myStyle = {
+  "color": "black"
+}  
 $.getJSON("{% url 'road_dataset' %}", function(data){
   var geojson = L.geoJson(data, {
+
+    style: myStyle,
+
     onEachFeature: function(feature, layer) {
       layer.bindPopup(feature.properties.road_name);
   }
@@ -103,16 +109,20 @@ $.getJSON("{% url 'road_dataset' %}", function(data){
   geojson.addTo(roadNetwork);
   });
 
-
-var wifi = new L.LayerGroup();   
+var wifi = new L.LayerGroup(); 
+var myStyle1 = {
+    "color": "red" 
+}  
 $.getJSON("{% url 'wifi_dataset' %}", function(data){
   var geojson = L.geoJson(data, {
+    style: myStyle1,
     onEachFeature: function(feature, layer) {
       layer.bindPopup(feature.properties.from_field);
   }
 });
   geojson.addTo(wifi);
   });
+
 
 $.getJSON("{% url 'wifi_node' %}", function(data){
   var geojson = L.geoJson(data, {
