@@ -1,5 +1,5 @@
 
-Django==2.2.3
+Django==2.2.4
 django-geojson==2.1.1
 django-leaflet==0.24.0
 Pillow==5.4.1
