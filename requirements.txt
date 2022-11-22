@@ -2,7 +2,7 @@
 Django==2.2.24
 django-geojson==2.1.1
 django-leaflet==0.24.0
-Pillow==9.0.0
+Pillow==9.3.0
 psycopg2==2.7.7
 psycopg2-binary==2.7.7
 
